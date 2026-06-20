@@ -6,8 +6,6 @@ import com.ems.dto.*;
 import com.ems.entity.Employee;
 import com.ems.exception.ResourceNotFoundException;
 import com.ems.repository.EmployeeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,21 +20,27 @@ import java.util.Optional;
 
 @Service
 public class EmployeeService {
+
+//    @Value("${services.payrollUrl}")
+//    private String url;
+    private final ServiceConfig serviceConfig;
+
     private final EmployeeRepository repo;
-    @Autowired
-    private DepartmentClient departmentClient;
 
-    @Autowired
-    private RestTemplate restTemplate;
+    private final DepartmentClient departmentClient;
 
-    @Autowired
-    private ServiceConfig config;
+    private final RestTemplate restTemplate;
 
-    @Value("${services.payrollUrl}")
-    private String url;
+    private final ServiceConfig config;
 
-    public EmployeeService(EmployeeRepository repo) {
+
+
+    public EmployeeService(ServiceConfig serviceConfig, EmployeeRepository repo, DepartmentClient departmentClient, RestTemplate restTemplate, ServiceConfig config) {
+        this.serviceConfig = serviceConfig;
         this.repo = repo;
+        this.departmentClient = departmentClient;
+        this.restTemplate = restTemplate;
+        this.config = config;
     }
 
     public List<EmployeeResponseDTO>  getAllEmployees(){
@@ -64,9 +68,9 @@ public class EmployeeService {
         System.out.println("Department received: " + department.getName());
 
         EmployeeResponseDTO employeeResponseDTO = mapToResponse(emp);
-        System.out.println(url);
+        System.out.println(serviceConfig.getPayrollUrl());
 
-        PayrollResponseDTO payrollResponseDTO = restTemplate.getForObject(url + id, PayrollResponseDTO.class);
+        PayrollResponseDTO payrollResponseDTO = restTemplate.getForObject(serviceConfig.getPayrollUrl() + id, PayrollResponseDTO.class);
 
         return new EmployeeDetailsDTO(employeeResponseDTO, department,payrollResponseDTO);
     }

@@ -1,4 +1,13 @@
-import static org.junit.jupiter.api.Assertions.*;
+package com.ems;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
 class EmployeeManagementApplicationTest {
-  
+
+    @Test
+    void contextLoads() {
+        // Verifies Spring context starts successfully
+    }
 }

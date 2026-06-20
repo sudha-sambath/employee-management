@@ -14,4 +14,9 @@ public class EmployeeResponseDTO {
     private Integer age;
     private String jobTitle;
 
+    public EmployeeResponseDTO(String name, Double salary){
+        this.name = name;
+        this.salary = salary;
+    }
+
 }

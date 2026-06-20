@@ -1,6 +1,7 @@
 package com.ems.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "employee")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Employee {
 
     @Id
@@ -23,4 +25,16 @@ public class Employee {
     private Long departmentId;
     private String jobTitle;
 
+
+    public Employee(String name, Double salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    public Employee(long id, String name, String department, double salary) {
+        this.id = id;
+        this.name = name;
+        this.department = department;
+        this.salary = salary;
+    }
 }
