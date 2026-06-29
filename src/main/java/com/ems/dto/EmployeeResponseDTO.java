@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EmployeeResponseDTO {
 
+    private Long id;
     private String name;
     private String department;
     private String email;
@@ -14,9 +15,10 @@ public class EmployeeResponseDTO {
     private Integer age;
     private String jobTitle;
 
-    public EmployeeResponseDTO(String name, Double salary){
+    public EmployeeResponseDTO(String name, Double salary, String department){
         this.name = name;
         this.salary = salary;
+        this.department = department;
     }
 
 }

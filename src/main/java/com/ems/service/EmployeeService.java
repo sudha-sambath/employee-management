@@ -64,8 +64,9 @@ public class EmployeeService {
             System.out.println("Calling Department Service...");
             department = departmentClient.getDepartmentById(emp.getDepartmentId());
         }
-
-        System.out.println("Department received: " + department.getName());
+        if (department != null) {
+            System.out.println("Department received: " + department.getName());
+        }
 
         EmployeeResponseDTO employeeResponseDTO = mapToResponse(emp);
         System.out.println(serviceConfig.getPayrollUrl());

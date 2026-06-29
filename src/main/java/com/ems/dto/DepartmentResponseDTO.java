@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DepartmentResponseDTO {
+    private Long id;
     private String name;
     private String Location;
     private Long managerId;

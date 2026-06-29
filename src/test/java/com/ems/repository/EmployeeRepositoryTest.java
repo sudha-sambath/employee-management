@@ -187,4 +187,28 @@ class EmployeeRepositoryTest {
         assertTrue(result.isEmpty());
 
     }
+
+    @Test
+    void getEmployeesByNameAndDepartment() {
+        List<Employee> employees = employeeRepository.saveAll(List.of(
+                new Employee(null,"John","IT",50000.00),
+                new Employee(null,"Sarah","HR",55000.00),
+                new Employee(null,"Smith","Finance",85000.00),
+                new Employee(null,"Sarah","IT",90000.00)
+        ));
+
+        List<Employee> result = employeeRepository.getEmployeesByNameAndDepartment("Sarah","IT");
+
+        assertEquals(1,result.size());
+
+        assertTrue(
+                result.stream()
+                        .allMatch(emp->emp.getName().equals("Sarah")
+                                && emp.getDepartment().equals("IT"))
+        );
+    }
+
+    @Test
+    void deleteByDepartment() {
+    }
 }
